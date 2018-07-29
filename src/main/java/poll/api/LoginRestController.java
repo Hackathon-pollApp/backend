@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import poll.application.EntityController;
 import poll.application.UserController;
+import poll.application.dto.EntityDTO;
 import poll.application.dto.UserDTO;
 import poll.utilities.InvalidParamException;
 import poll.utilities.NotFoundException;
@@ -21,28 +23,31 @@ import poll.utilities.NotFoundException;
 @RestController
 public class LoginRestController {
     @Autowired
-    private UserController controller;
+    private UserController userController;
+    @Autowired
+    private EntityController entityController;
 
     @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
-    public String login(@RequestBody String jUser) throws NotFoundException, InvalidParamException, ParseException {
+    public String login(@RequestBody String formInputs) throws NotFoundException, InvalidParamException, ParseException {
 
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(jUser);
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(formInputs);
         String type = (String) jsonObject.get("type");
 
         UserDTO user = null;
+        EntityDTO entity = null;
+
         if (type.equals("user")) {
-            UserDTO userToLog = new Gson().fromJson(jUser, UserDTO.class);
+            UserDTO userToLog = new Gson().fromJson(formInputs, UserDTO.class);
 
-            user = controller.login(userToLog);
+            user = userController.login(userToLog);
+        }else if (type.equals("entity")) {
+            EntityDTO entityToLog = new Gson().fromJson(formInputs, EntityDTO.class);
+
+            entity = entityController.login(entityToLog);
         }
-        if (type.equals("entity")) {
-            //UserDTO userToLog = new Gson().fromJson(jUser, UserDTO.class);
 
-            //user = controller.login(userToLog);
-        }
-
-        return toJson(user);
+        return (user != null) ? toJson(user) : (entity != null) ? toJson(entity) : "";
     }
 
     private String toJson(Object object) {

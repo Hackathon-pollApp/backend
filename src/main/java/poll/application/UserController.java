@@ -50,7 +50,7 @@ public class UserController {
         return userDTOList;
     }
 
-    User getUser(int userId) throws NotFoundException {
+    public User getUser(int userId) throws NotFoundException {
         User user = userRepository.getUserById(userId);
 
         return user;

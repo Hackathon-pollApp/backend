@@ -1,42 +1,34 @@
 package poll.domain;
 
+import poll.utilities.Encryptor;
+import poll.utilities.InvalidParamException;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import poll.utilities.Encryptor;
-import poll.utilities.InvalidParamException;
-
-@Entity(name = "User")
-public class User {
+@javax.persistence.Entity(name = "Entity")
+public class Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", updatable = false, nullable = false)
+    @Column(name = "entityId", updatable = false, nullable = false)
     private Integer id;
-    //private Integer entityId;
     private String name;
     @Column(unique = true, length = 100)
     private String email;
     private String password;
-    @Column(columnDefinition = "integer default 1")
-    private Integer votes;
-    @Column(columnDefinition = "tinyint(1) default 0")
-    private boolean isActive;
 
-    public User() {
+    public Entity() {
     }
 
-    public User(String name, String email, String password, Integer votes, boolean isActive) throws InvalidParamException {
+    public Entity(String name, String email, String password) throws InvalidParamException {
         checkValidName(name);
         checkValidEmail(email);
         checkValidPassword(password);
         this.name = name;
         this.email = email;
         this.password = Encryptor.encryptPassword(password);
-        this.votes = votes;
-        this.isActive = isActive;
     }
 
     private void checkValidName(String name) throws InvalidParamException {
@@ -84,19 +76,4 @@ public class User {
         return password;
     }
 
-    public Integer getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Integer votes) {
-        this.votes = votes;
-    }
-
-    public boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
 }
