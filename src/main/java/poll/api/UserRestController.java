@@ -23,33 +23,33 @@ import poll.utilities.NotFoundException;
 @RestController
 public class UserRestController {
 
-	@Autowired
-	private UserController controller;
+    @Autowired
+    private UserController controller;
 
-	@PostMapping(value = "/users", produces = "application/json;charset=UTF-8")
-	public String register(@RequestBody String jUser) throws InvalidParamException, NotFoundException {
+    @PostMapping(value = "/users", produces = "application/json;charset=UTF-8")
+    public String register(@RequestBody String jUser) throws InvalidParamException, NotFoundException {
 
-		UserDTO newUser = new Gson().fromJson(jUser, UserDTO.class);
+        UserDTO newUser = new Gson().fromJson(jUser, UserDTO.class);
 
-		UserDTO user = controller.register(newUser);
+        UserDTO user = controller.register(newUser);
 
-		return toJson(user);
-	}
+        return toJson(user);
+    }
 
-	private String toJson(Object object){
-		
-		Gson gson=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		return gson.toJson(object);
-	}
-	
-	@GetMapping(value = "/users", produces = "application/json;charset=UTF-8")
-	public String listUsers() throws NotFoundException {
+    private String toJson(Object object) {
 
-		List<UserDTO> users = controller.listUsers();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return gson.toJson(object);
+    }
 
-		return toJson(users);
-	}
+    @GetMapping(value = "/users", produces = "application/json;charset=UTF-8")
+    public String listUsers() throws NotFoundException {
 
+        List<UserDTO> users = controller.listUsers();
+
+        return toJson(users);
+    }
+    /*
 	@PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
 	public String login(@RequestBody String jUser) throws NotFoundException, InvalidParamException {
 
@@ -59,24 +59,25 @@ public class UserRestController {
 
 		return toJson(user);
 	}
+	*/
 
-	@GetMapping(value = "/users/{userId}", produces = "application/json;charset=UTF-8")
-	public String getUser(@PathVariable int userId) throws NotFoundException {
+    @GetMapping(value = "/users/{userId}", produces = "application/json;charset=UTF-8")
+    public String getUser(@PathVariable int userId) throws NotFoundException {
 
-		UserDTO user = controller.getUserDTO(userId);
+        UserDTO user = controller.getUserDTO(userId);
 
-		return toJson(user);
-	}
+        return toJson(user);
+    }
 
-	@PutMapping(value = "/users/{userId}", produces = "application/json;charset=UTF-8")
-	public String UpdateUser(@PathVariable int userId, @RequestBody String jUser)
-			throws NotFoundException, InvalidParamException {
+    @PutMapping(value = "/users/{userId}", produces = "application/json;charset=UTF-8")
+    public String UpdateUser(@PathVariable int userId, @RequestBody String jUser)
+            throws NotFoundException, InvalidParamException {
 
-		UserDTO userToUpdate = new Gson().fromJson(jUser, UserDTO.class);
+        UserDTO userToUpdate = new Gson().fromJson(jUser, UserDTO.class);
 
-		UserDTO user = controller.updateUser(userId, userToUpdate);
+        UserDTO user = controller.updateUser(userId, userToUpdate);
 
-		return toJson(user);
-	}
+        return toJson(user);
+    }
 
 }

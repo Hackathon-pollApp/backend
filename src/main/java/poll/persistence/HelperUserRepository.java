@@ -9,8 +9,8 @@ import poll.domain.User;
 
 interface HelperUserRepository extends CrudRepository<User, Integer> {
 
-	public User findByEmail(String email);
+    public User findByEmail(String email);
 
-	public User findByName(String name);
+    public User findByName(String name);
 
 }
