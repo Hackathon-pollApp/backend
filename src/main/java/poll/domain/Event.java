@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "EventId", updatable = false, nullable = false)
+    @Column(name = "eventId", updatable = false, nullable = false)
     private Integer id;
     private Integer entityId;
     private String name;
