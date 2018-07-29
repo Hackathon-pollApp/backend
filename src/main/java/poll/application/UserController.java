@@ -72,6 +72,7 @@ public class UserController {
 
         if (!userToUpdate.getName().equals(""))
             user.setName(userToUpdate.getName());
+        //faltan atributos
 
         userRepository.save(user);
 

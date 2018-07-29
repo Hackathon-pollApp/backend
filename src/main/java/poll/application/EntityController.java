@@ -42,8 +42,8 @@ public class EntityController {
         if (entityList.isEmpty())
             throw new NotFoundException();
 
-        for (Entity u : entityList) {
-            entityDTOList.add(new EntityDTO(u));
+        for (Entity e : entityList) {
+            entityDTOList.add(new EntityDTO(e));
         }
 
         return entityDTOList;
@@ -72,6 +72,7 @@ public class EntityController {
         if (!entityToUpdate.getName().equals(""))
             entity.setName(entityToUpdate.getName());
 
+        //faltan atributos
         entityRepository.save(entity);
 
         return new EntityDTO(entity);

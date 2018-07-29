@@ -2,7 +2,7 @@ package poll.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import poll.domain.Entity;
+import poll.domain.Event;
 import poll.utilities.InvalidParamException;
 import poll.utilities.NotFoundException;
 
@@ -10,42 +10,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class EntityRepository {
+public class EventRepository {
 
     @Autowired
-    private HelperEntityRepository repository;
+    private HelperEventRepository repository;
 
-    public void save(Entity entity) throws InvalidParamException {
-        if (entity == null)
+    public void save(Event event) throws InvalidParamException {
+        if (event == null)
             throw new InvalidParamException();
         try {
-            repository.save(entity);
+            repository.save(event);
         } catch (Exception e) {
             throw new InvalidParamException();
         }
     }
 
-    public Entity getEntityByEmail(String email) throws InvalidParamException {
-        Entity Entity = repository.findByEmail(email);
-        if (Entity == null)
+    public Event getEventByEntityId(int entityId) throws InvalidParamException {
+        Event event = repository.findByEntityId(entityId);
+        if (event == null)
             throw new InvalidParamException();
-        return Entity;
+        return event;
     }
 
-    public List<Entity> getAllEntities() {
-        List<Entity> result = new ArrayList<>();
+    public List<Event> getAllEvents() {
+        List<Event> result = new ArrayList<>();
 
-        for (Entity e : repository.findAll()) {
+        for (Event e : repository.findAll()) {
             result.add(e);
         }
 
         return result;
     }
 
-    public Entity getEntityById(int entityId) throws NotFoundException {
+    public Event getEventById(int eventId) throws NotFoundException {
 
         try {
-            return repository.findById(entityId).get();
+            return repository.findById(eventId).get();
         } catch (Exception exception) {
             throw new NotFoundException();
         }
