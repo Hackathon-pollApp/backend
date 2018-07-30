@@ -16,6 +16,10 @@ public class Option {
     private String optionText;
     private Integer quantity;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventId", referencedColumnName = "eventId", insertable = false, updatable = false)
+    private Event event;
+
     public Option() {
     }
 

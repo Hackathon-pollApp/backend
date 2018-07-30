@@ -14,6 +14,8 @@ public class EventDTO {
     @Expose
     private String description;
     @Expose
+    private String comment;
+    @Expose
     private String image;
     @Expose
     private String question;
@@ -27,6 +29,7 @@ public class EventDTO {
         this.entityId = event.getEntityId();
         this.name = event.getName();
         this.description = event.getDescription();
+        this.comment = event.getComment();
         this.image = event.getImage();
         this.question = event.getQuestion();
         this.isActive = event.getIsActive();
@@ -63,5 +66,9 @@ public class EventDTO {
 
     public boolean getIsActive() {
         return isActive;
+    }
+
+    public String getComment() {
+        return comment;
     }
 }

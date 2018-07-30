@@ -3,10 +3,9 @@ package poll.domain;
 import poll.utilities.Encryptor;
 import poll.utilities.InvalidParamException;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @javax.persistence.Entity(name = "Entity")
 public class Entity {
@@ -18,6 +17,12 @@ public class Entity {
     @Column(unique = true, length = 100)
     private String email;
     private String password;
+
+    //Entity - Event
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "entity")
+    private Set<Event> events = new HashSet<>();
 
     public Entity() {
     }
@@ -76,4 +81,12 @@ public class Entity {
         return password;
     }
 
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void addEvent(Event event) {
+        events.add(event);
+        event.setEntity(this);
+    }
 }

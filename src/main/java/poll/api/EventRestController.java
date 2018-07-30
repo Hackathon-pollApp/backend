@@ -60,4 +60,12 @@ public class EventRestController {
 
         return toJson(event);
     }
+
+    @GetMapping(value = "/entities/{entityId}/events", produces = "application/json;charset=UTF-8")
+    public String getEvents(@PathVariable int entityId) throws NotFoundException, InvalidParamException {
+
+        List<EventDTO> events = controller.getEventsByEntity(entityId);
+
+        return toJson(events);
+    }
 }

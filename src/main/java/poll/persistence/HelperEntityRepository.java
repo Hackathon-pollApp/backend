@@ -7,6 +7,8 @@ import poll.domain.Entity;
 // CRUD refers Create, Read, Update, Delete
 interface HelperEntityRepository extends CrudRepository<Entity, Integer> {
 
+
+
     public Entity findByEmail(String email);
 
     public Entity findByName(String name);

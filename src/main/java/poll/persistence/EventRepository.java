@@ -2,6 +2,7 @@ package poll.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import poll.domain.Entity;
 import poll.domain.Event;
 import poll.utilities.InvalidParamException;
 import poll.utilities.NotFoundException;
@@ -25,11 +26,8 @@ public class EventRepository {
         }
     }
 
-    public Event getEventByEntityId(int entityId) throws InvalidParamException {
-        Event event = repository.findByEntityId(entityId);
-        if (event == null)
-            throw new InvalidParamException();
-        return event;
+    public List<Event> getEventsByEntityId(Entity entityId) throws InvalidParamException {
+        return repository.findAllByEntity(entityId);
     }
 
     public List<Event> getAllEvents() {
