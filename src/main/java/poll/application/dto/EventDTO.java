@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import poll.domain.Event;
 import poll.utilities.NotFoundException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventDTO {
     @Expose
     private int id;
@@ -21,6 +24,8 @@ public class EventDTO {
     private String question;
     @Expose
     private boolean isActive;
+    @Expose
+    List<UserDTO> users = new ArrayList<>();
 
     public EventDTO(Event event) throws NotFoundException {
         if (event == null)
@@ -70,5 +75,9 @@ public class EventDTO {
 
     public String getComment() {
         return comment;
+    }
+
+    public List<UserDTO> getUsers() {
+        return users;
     }
 }

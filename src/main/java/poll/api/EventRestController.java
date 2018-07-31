@@ -28,9 +28,9 @@ public class EventRestController {
     public String create(@RequestBody String formInputs) throws InvalidParamException, NotFoundException, ParseException {
 
         EventDTO newEvent = new Gson().fromJson(formInputs, EventDTO.class);
-
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(formInputs);
+        System.out.println(newEvent.getUsers().toString());
+        //JSONParser jsonParser = new JSONParser();
+        //JSONObject jsonObject = (JSONObject) jsonParser.parse(formInputs);
         //ArrayList user = (ArrayList) jsonObject.get("users");
         //UserDTO newUser = new Gson().fromJson(user, UserDTO.class);
         //System.out.println(user);
