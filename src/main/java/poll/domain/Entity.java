@@ -24,6 +24,12 @@ public class Entity {
             mappedBy = "entity")
     private Set<Event> events = new HashSet<>();
 
+    //Entity - User
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "entity")
+    private Set<User> users = new HashSet<>();
+
     public Entity() {
     }
 

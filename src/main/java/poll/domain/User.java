@@ -1,10 +1,7 @@
 package poll.domain;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import poll.utilities.Encryptor;
 import poll.utilities.InvalidParamException;
@@ -24,6 +21,11 @@ public class User {
     private Integer votes;
     @Column(columnDefinition = "tinyint(1) default 0")
     private boolean isActive;
+
+    //User - Entity
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "entityId", referencedColumnName = "entityId", insertable = false, updatable = false)
+    private poll.domain.Entity entity;
 
     public User() {
     }
