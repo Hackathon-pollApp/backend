@@ -22,6 +22,7 @@ public class Event {
     @Column(columnDefinition = "tinyint(1) default 0")
     private boolean isActive;
 
+    //Event - Option
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "event")

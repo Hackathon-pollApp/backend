@@ -20,7 +20,7 @@ public class UserController {
 
     public UserDTO register(UserDTO userDTO) throws InvalidParamException, NotFoundException {
 
-        User user = new User(userDTO.getName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getVotes(), userDTO.getIsActive());
+        User user = new User(userDTO.getEntityId(), userDTO.getName(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getVotes(), userDTO.getIsActive());
 
         userRepository.save(user);
 

@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId", updatable = false, nullable = false)
     private Integer id;
-    //private Integer entityId;
+    private Integer entityId;
     private String name;
     @Column(unique = true, length = 100)
     private String email;
@@ -28,10 +28,11 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, Integer votes, boolean isActive) throws InvalidParamException {
+    public User(Integer entityId, String name, String email, String password, Integer votes, boolean isActive) throws InvalidParamException {
         checkValidName(name);
         checkValidEmail(email);
         checkValidPassword(password);
+        this.entityId = entityId;
         this.name = name;
         this.email = email;
         this.password = Encryptor.encryptPassword(password);
@@ -60,6 +61,10 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getEntityId() {
+        return entityId;
     }
 
     public String getName() {

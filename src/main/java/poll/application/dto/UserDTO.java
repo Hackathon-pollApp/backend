@@ -9,6 +9,8 @@ public class UserDTO {
     @Expose
     private int id;
     @Expose
+    private int entityId;
+    @Expose
     private String name, email;
     private String password;
     @Expose
@@ -20,6 +22,7 @@ public class UserDTO {
         if (user == null)
             throw new NotFoundException();
 
+        this.entityId = user.getEntityId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
@@ -30,6 +33,10 @@ public class UserDTO {
 
     public int getId() {
         return id;
+    }
+
+    public int getEntityId() {
+        return entityId;
     }
 
     public String getName() {
